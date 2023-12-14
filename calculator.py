@@ -19,12 +19,9 @@ def calculate_loan_monthly_cost(loan):
     duration = loan['duration'] * 12
     money_paid = loan['money paid']
     tax = loan['tax'] / 100
-    amount_left = principal *(1 + rate) - money_paid
+    amount_left = principal *(1 + tax) - money_paid
     if rate == 0:
         monthly_cost = amount_left / duration
     else:
-        monthly_cost = (amount_left * (rate * (1 + rate) ** duration)) / ((1 + rate) ** duration - 1)
+        monthly_cost = (amount_left * rate) / (1 - (1 + rate)**(-duration))
     return monthly_cost
-
-
-
