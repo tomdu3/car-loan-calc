@@ -20,24 +20,22 @@ NINJA_API_KEY = os.getenv('NINJA_API_KEY')
 NINJA_URL = 'https://api.api-ninjas.com/v1/cars'
 
 
-# Get the fule data from the RAPID API
-fuel_headers = {
-	'X-RapidAPI-Key': RAPID_API_KEY,
-	'X-RapidAPI-Host': 'gas-price.p.rapidapi.com'
-}
-
-response = requests.get(RAPID_URL, headers=fuel_headers)
-
-print(response.json())
-if response.status_code == 200:
-    print('Data retrieved successfully')
-    with open('fuel_data.json', 'w') as f:
-        json.dump(response.json(), f)
-else:
-    print('Error retrieving data')
-    print(response.status_code)
-    print(response.text)
-    os.exit(1)
+# Get the fuel data from the RAPID API
+def get_fuel_us():
+    fuel_headers = {
+        'X-RapidAPI-Key': RAPID_API_KEY,
+        'X-RapidAPI-Host': 'gas-price.p.rapidapi.com'
+    }
+    response = requests.get(RAPID_URL, headers=fuel_headers)
+    if response.status_code == 200:
+        print('Data retrieved successfully')
+        with open('fuel_data.json', 'w') as f:
+            json.dump(response.json(), f)
+    else:
+        print('Error retrieving data')
+        print(response.status_code)
+        print(response.text)
+        os.exit(1)
 
 # get info for mpg from API Ninjas
 def get_mpg_info():
@@ -67,6 +65,9 @@ def retrieve_mpg_data(mpg):
         print(response.status_code)
         print(response.text)
         os.exit(1)
+
+# TEST
+get_fuel_us()
 
 mpg = get_mpg_info()
 retrieve_mpg_data(mpg)
