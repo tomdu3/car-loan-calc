@@ -1,3 +1,5 @@
+import get_info
+
 def get_user_loan_info():
     loan = {}
     loan['principal'] = float(input("Enter your loan amount: "))
@@ -25,3 +27,21 @@ def calculate_loan_monthly_cost(loan):
     else:
         monthly_cost = (amount_left * rate) / (1 - (1 + rate)**(-duration))
     return monthly_cost
+
+# get user info info for mpg from API Ninjas
+def get_user_mpg_info():
+    mpg = {}
+    mpg['make'] = input("Enter your car make: ")
+    mpg['model'] = input("Enter your car model: ")
+    mpg['year'] = input("Enter your car year: ")
+    return mpg
+
+def show_mpg_info(mpg):
+    print("---- Mpg Information ----")
+    print("--------------------------")
+    mpg_data = get_info.retrieve_mpg_data(mpg)
+
+    # print info table
+    for item in mpg_data:
+        print(item.title() + ": " + str(mpg_data[item]))
+

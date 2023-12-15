@@ -37,13 +37,7 @@ def get_fuel_us():
         print(response.text)
         os.exit(1)
 
-# get info for mpg from API Ninjas
-def get_mpg_info():
-    mpg = {}
-    mpg['make'] = input("Enter your car make: ")
-    mpg['model'] = input("Enter your car model: ")
-    mpg['year'] = input("Enter your car year: ")
-    return mpg
+
 
 def retrieve_mpg_data(mpg):
     mpg_headers = {
@@ -60,6 +54,7 @@ def retrieve_mpg_data(mpg):
         with open('mpg_data.json', 'w') as f:
             json.dump(response.json(), f)
         print(response.json())
+        return response.json()
     else:
         print('Error retrieving data')
         print(response.status_code)
@@ -67,7 +62,7 @@ def retrieve_mpg_data(mpg):
         os.exit(1)
 
 # TEST
-get_fuel_us()
+# get_fuel_us()
 
-mpg = get_mpg_info()
-retrieve_mpg_data(mpg)
+# mpg = get_mpg_info()
+# retrieve_mpg_data(mpg)
