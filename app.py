@@ -4,7 +4,8 @@ import calculator
 
 def main():
     # get user info for fuel from RAPID API
-    fuel = get_info.get_fuel_us()
+    fuel = get_info.get_fuel_cost()
+    get_info.show_fuel_cost(fuel)
 
     # get user info for mpg from API Ninjas
     mpg = calculator.get_user_mpg_info()

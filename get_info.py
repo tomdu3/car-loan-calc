@@ -37,6 +37,47 @@ def get_fuel_us():
         print(response.text)
         os.exit(1)
 
+def get_fuel_cost():
+
+    if os.path.isfile('fuel_data.json'):
+        update_cost = input('Would you like to update the fuel cost data? (y/n) ')
+        if update_cost.lower() == 'y':
+            get_fuel_us()
+    else:
+        get_fuel_us()
+
+    with open('fuel_data.json', 'r') as f:
+        fuel_data = json.load(f)
+
+    # check if data was retrieved successfully
+    if not fuel_data['success']:
+        print('Error retrieving data')
+        os.exit(1)
+    
+    states = {state['name']: id for id, state in enumerate(fuel_data['result'])}
+    print(states)
+
+    # get the state and return the gas price
+    state = input("Enter your state: ").capitalize()
+    if state in states:
+        state_id = states[state]
+        return {
+                'state': state,
+                'gasoline': fuel_data['result'][state_id]['gasoline'],
+                'midGrade': fuel_data['result'][state_id]['midGrade'],
+                'premium': fuel_data['result'][state_id]['premium'],
+                'diesel': fuel_data['result'][state_id]['diesel']
+            }
+    else:
+        print('State not found')
+        os.exit(1)
+
+def show_fuel_cost(fuel):
+    print("---- Fuel Information ----")
+    print("--------------------------")
+    
+    for key in fuel:
+        print(key + ": " + str(fuel[key]))
 
 
 def retrieve_mpg_data(mpg):
@@ -60,6 +101,7 @@ def retrieve_mpg_data(mpg):
         print(response.status_code)
         print(response.text)
         os.exit(1)
+
 
 # TEST
 # get_fuel_us()
