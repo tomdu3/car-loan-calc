@@ -102,9 +102,21 @@ def retrieve_mpg_data(mpg):
         print(response.text)
         os.exit(1)
 
+def get_user_stats():
+    print("---- User Information ----")
+    print("--------------------------")
+    user_stats = {}
+    user_stats['city_weekday_miles'] = float(input('Enter your average work week city miles: '))
+    user_stats['city_weekend_miles'] = float(input('Enter your average weekend city miles: '))
+    user_stats['highway_weekday_miles'] = float(input('Enter your average work week highway miles: '))
+    user_stats['highway_weekend_miles'] = float(input('Enter your average weekend highway miles: '))
+    user_stats['city_month_miles'] = user_stats['city_weekday_miles'] * 4 + user_stats['city_weekend_miles'] * 4
+    user_stats['highway_month_miles'] = user_stats['highway_weekday_miles'] * 4 + user_stats['highway_weekend_miles'] *4
+    user_stats['monthly_miles'] = user_stats['city_month_miles'] + user_stats['highway_month_miles']
+    return user_stats
 
-# TEST
-# get_fuel_us()
-
-# mpg = get_mpg_info()
-# retrieve_mpg_data(mpg)
+def show_user_stats(user_stats):
+    print("---- User Information ----")
+    print("--------------------------")
+    for key in user_stats:
+        print(key + ": " + str(user_stats[key]))
