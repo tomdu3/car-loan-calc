@@ -1,6 +1,6 @@
 import get_info
 import calculator
-
+import scrape_maintenance
 
 def main():
     # get user info for fuel from RAPID API
@@ -20,6 +20,9 @@ def main():
     # show loan monthly cost
     print("Your monthly cost is: " + str(monthly_cost))
 
-
+    # get user info for maintenance cost
+    maintenance_cost = scrape_maintenance.get_maintenance_cost()
+    scrape_maintenance.show_maintenance_cost(maintenance_cost)
+    
 if __name__ == '__main__':
     main()

@@ -26,20 +26,21 @@ def get_maintenance_cost():
     table = tables[0]
     table_body = table.find('tbody')
     rows = table_body.find_all('tr')
-    maintenance_cost_10 = {}
+    maintenance_cost = {}
     for row in rows:
         cols = row.find_all('td')
         cols = [el.text.strip() for el in cols]
-        maintenance_cost_10[cols[1]] = int(cols[2].replace('$', '').replace(',', ''))
+        # convert 10 year maintenance cost to monthly cost
+        maintenance_cost[cols[1]] = int(cols[2].replace('$', '').replace(',', ''))/10/12
 
     with open('maintenance_costs.json', 'w') as file:
-        json.dump(maintenance_cost_10, file)
+        json.dump(maintenance_cost, file)
 
     return maintenance_cost_10
 
-def show_mainenance_cost(maintenance_cost_10):
+def show_mainenance_cost(maintenance_cost):
     print('---- Maintenance Costs ----')
     print('---------------------------')
-    for key in maintenance_cost_10:
-        print(key + ': ' + str(maintenance_cost_10[key]))
+    for key in maintenance_cost:
+        print(key + ': ' + str(maintenance_cost[key]))
 

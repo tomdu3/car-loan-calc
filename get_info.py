@@ -80,27 +80,27 @@ def show_fuel_cost(fuel):
         print(key + ": " + str(fuel[key]))
 
 
-def retrieve_mpg_data(mpg):
-    mpg_headers = {
-        'X-Api-Key': NINJA_API_KEY
-    }
-    mpg_params = {
-        'make': mpg['make'],
-        'model': mpg['model'],
-        'year': mpg['year']
-    }
-    response = requests.get(NINJA_URL, headers=mpg_headers, params=mpg_params)
-    if response.status_code == 200:
-        print('Data retrieved successfully')
-        with open('mpg_data.json', 'w') as f:
-            json.dump(response.json(), f)
-        print(response.json())
-        return response.json()
-    else:
-        print('Error retrieving data')
-        print(response.status_code)
-        print(response.text)
-        os.exit(1)
+# def retrieve_mpg_data(mpg):
+#    mpg_headers = {
+#        'X-Api-Key': NINJA_API_KEY
+#    }
+#    mpg_params = {
+#        'make': mpg['make'],
+#        'model': mpg['model'],
+#        'year': mpg['year']
+#    }
+#    response = requests.get(NINJA_URL, headers=mpg_headers, params=mpg_params)
+#    if response.status_code == 200:
+#        print('Data retrieved successfully')
+#        with open('mpg_data.json', 'w') as f:
+#            json.dump(response.json(), f)
+#        print(response.json())
+#        return response.json()
+#    else:
+#        print('Error retrieving data')
+#        print(response.status_code)
+#        print(response.text)
+#        os.exit(1)
 
 def get_user_stats():
     print("---- User Information ----")
