@@ -55,8 +55,7 @@ def get_fuel_cost():
         os.exit(1)
     
     states = {state['name']: id for id, state in enumerate(fuel_data['result'])}
-    print(states)
-
+   
     # get the state and return the gas price
     state = input("Enter your state: ").capitalize()
     if state in states:

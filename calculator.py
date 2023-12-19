@@ -1,26 +1,14 @@
 import get_info
 
 def get_user_loan_info():
-    loan = {}
-    loan['principal'] = float(input("Enter your loan amount: "))
-    loan['rate'] = float(input("Enter your interest rate: "))
-    loan['duration'] = float(input("Enter your loan duration (in years): "))
-    loan['money paid'] = float(input("Enter the amount you've already paid towards the loan: "))
-    loan['tax'] = float(input("Enter your tax rate: "))
-    return loan
-
-def show_loan_info(loan):
-    print("---- Loan Information ----")
-    print("--------------------------")
-    for key, value in loan.items():
-        print(key.title() + ": " + str(value))
-
-def calculate_loan_monthly_cost(loan):
-    principal = loan['principal']
-    rate = loan['rate'] / 100 /12
-    duration = loan['duration'] * 12
-    money_paid = loan['money paid']
-    tax = loan['tax'] / 100
+    principal = float(input("Enter your loan amount: "))
+    rate = float(input("Enter your interest rate: "))
+    duration = int(input("Enter your loan duration (in years): "))
+    money_paid = float(input("Enter the amount you've already paid towards the loan: "))
+    tax = float(input("Enter your tax rate: "))
+    rate = rate / 100 /12
+    duration = duration * 12
+    tax = tax / 100
     amount_left = principal *(1 + tax) - money_paid
     if rate == 0:
         monthly_cost = amount_left / duration
@@ -28,7 +16,7 @@ def calculate_loan_monthly_cost(loan):
         monthly_cost = (amount_left * rate) / (1 - (1 + rate)**(-duration))
     return monthly_cost
 
-# get user info info for mpg from API Ninjas
+# get info for mpg from API Ninjas
 # def get_user_mpg_info():
 #    mpg = {}
 #    mpg['make'] = input("Enter your car make: ")
@@ -36,21 +24,21 @@ def calculate_loan_monthly_cost(loan):
 #    mpg['year'] = input("Enter your car year: ")
 #    return mpg
 
-# get user info info for the user
-def get_user_mpg_data():
-    mpg = {}
-    mpg['city_cost'] = float(input("Enter your average city mpg cost: "))
-    mpg['highway_cost'] = float(input("Enter your average highway mpg cost: "))
 
+# get user info for mpg
+def get_user_mpg_data(city_miles, highway_miles, fuel_prices):
+  
+    city_mpg = float(input("Enter your city mpg: "))
+    highway_mpg = float(input("Enter your average highway mpg: "))
+    print('Possible fuel types', ', '.join(fuel_prices.keys()))
+    fuel_type = input("Enter your fuel type: ").lower()
+    if fuel_type not in fuel_prices:
+        print('Fuel type not found')
+        exit(1)
+    fuel_price = fuel_prices[fuel_type]
+    total_gas_cost = (city_miles / city_mpg + highway_miles / highway_mpg) * fuel_price
+    return total_gas_cost
+    
 
-def show_mpg_info(mpg):
-    print("---- Mpg Information ----")
-    print("--------------------------")
-    mpg_data = get_info.retrieve_mpg_data(mpg)
-
-    # print info table
-    for item in mpg_data:
-        print(item)
-        # print(item + ": " + str(mpg_data[item]))
 
 

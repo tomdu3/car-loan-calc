@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 import sys
+import os
 import json
 
 def get_maintenance_cost():
@@ -11,8 +12,8 @@ def get_maintenance_cost():
         update_cost = input('Would you like to update the maintenance cost data? (y/n) ')
         if update_cost.lower() != 'y':
             with open('maintenance_costs.json', 'r') as file:
-                maintenance_cost_10 = json.load(file)
-            return maintenance_cost_10
+                maintenance_cost = json.load(file)
+            return maintenance_cost
     response = requests.get(url)
     if response.status_code != 200:
         print('Error retrieving data')
@@ -36,9 +37,9 @@ def get_maintenance_cost():
     with open('maintenance_costs.json', 'w') as file:
         json.dump(maintenance_cost, file)
 
-    return maintenance_cost_10
+    return maintenance_cost
 
-def show_mainenance_cost(maintenance_cost):
+def show_maintenance_cost(maintenance_cost):
     print('---- Maintenance Costs ----')
     print('---------------------------')
     for key in maintenance_cost:
