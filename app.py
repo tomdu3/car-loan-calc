@@ -12,8 +12,7 @@ def main():
         'premium': float(fuel['premium']),
         'diesel': float(fuel['diesel'])
     }
-    print(fuel_prices)
-
+   
     # get user stats
     user_stats = get_info.get_user_stats()
     city_miles = user_stats['city_month_miles']
@@ -41,10 +40,12 @@ def main():
         if car['brand'] not in maintenance_monthly_cost:
             print('Brand not found')
             exit(1)
-        car['maintenance_monthly_cost'] = maintenance_monthly_cost[car['brand']]
-        car['monthly_gas_cost'] = calculator.get_user_mpg_data(city_miles, highway_miles, fuel_prices)
+        car['maintenance_monthly_cost'] =maintenance_monthly_cost[car['brand']]
+        car['monthly_gas_cost'] = calculator.get_user_mpg_data(
+                city_miles, highway_miles, fuel_prices)
         car['loan_monthly_cost'] = calculator.get_user_loan_info()
-        car['total_monthly_cost'] = car['maintenance_monthly_cost'] + car['monthly_gas_cost'] + car['loan_monthly_cost']
+        car['total_monthly_cost'] = car['maintenance_monthly_cost'] + \
+                car['monthly_gas_cost'] + car['loan_monthly_cost']
         cars.append(car)
     print('--------------------------------')
     print('------ Car monthly costs -------')
