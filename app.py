@@ -32,9 +32,9 @@ def main():
     cars = {}
     print('------ Enter car details -------')
     print('--------------------------------')
-    print('Available brands:', ', '.join(maintenance_monthly_cost.keys()))
     cars = []
     for i in range(number_of_cars):
+        print('Available brands:', ', '.join(maintenance_monthly_cost.keys()))
         car = {}
         car['brand'] = input("Enter your car make: ").capitalize()
         if car['brand'] not in maintenance_monthly_cost:
@@ -51,11 +51,12 @@ def main():
     print('------ Car monthly costs -------')
     for car in cars:
         print('Brand: ' + car['brand'])
-        print('Maintenance cost: ' + str(car['maintenance_monthly_cost']))
-        print('Gas cost: ' + str(car['monthly_gas_cost']))
-        print('Loan cost: ' + str(car['loan_monthly_cost']))
+        print('Maintenance cost: ' + str(round(
+            car['maintenance_monthly_cost'],2)))
+        print('Gas cost: ' + str(round(car['monthly_gas_cost'],2)))
+        print('Loan cost: ' + str(round(car['loan_monthly_cost'],2)))
         print('--------------------------------')
-        print('Total monthly cost: ' + str(car['total_monthly_cost']))
+        print('Total monthly cost: ' + str(round(car['total_monthly_cost'],2)))
         print('--------------------------------')
 
 
