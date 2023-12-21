@@ -5,3 +5,5 @@
 Project requirements:
 ![Project overview](./docs/project_overview.png)
 
+Tomislav Dukez
+Decemeber 2023
